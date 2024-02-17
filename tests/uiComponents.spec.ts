@@ -95,3 +95,17 @@ test ('Lists and dropdowns', async ({page}) => {
         await dropDownMenu.click()
     }
 })
+
+test ('Tooltips', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Tooltip').click()
+
+    const toolTipCard = page.locator('nb-card', {hasText: "Tooltip Placements"})
+    await toolTipCard.getByRole('button', {name: "Top"}).hover()
+
+    page.getByRole('tooltip') // only applicable if you have 'tooltip' role created
+
+    const tooltip = await page.locator('nb-tooltip').textContent()
+
+    await expect(tooltip).toEqual('This is a tooltip')
+})
