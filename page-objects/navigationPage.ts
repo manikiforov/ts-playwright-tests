@@ -1,12 +1,11 @@
 import { Page } from "@playwright/test"
+import { HelperBase } from "./helperBase"
 
-export class NaviagtionPage {
-
-    readonly page: Page
+export class NaviagtionPage extends HelperBase {
 
     constructor(page: Page) {
 
-        this.page = page
+        super(page)
 
     }
 
@@ -14,6 +13,7 @@ export class NaviagtionPage {
 
         await this.selectGroupMenuitem('Forms')
         await this.page.getByText('Form Layout').click()
+        await this.waitForNumberOfSeconds(2)
     }
 
     async datePickerPage() {
